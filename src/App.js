@@ -1,5 +1,6 @@
+import { useState } from 'react';
 import styled from 'styled-components';
-import { ProductsFeed } from './components';
+import { ProductsFeed, ProductTypeFilter } from './components';
 import GlobalStyle from './globalStyles';
 
 const AppContainer = styled.div`
@@ -8,10 +9,16 @@ const AppContainer = styled.div`
 `;
 
 function App() {
+  const [activeTypes, setActiveTypes] = useState([]);
+
   return (
     <AppContainer>
       <GlobalStyle />
-      <ProductsFeed />
+      <ProductTypeFilter
+        activeTypes={activeTypes}
+        setActiveTypes={setActiveTypes}
+      />
+      <ProductsFeed activeTypes={activeTypes} />
     </AppContainer>
   );
 }

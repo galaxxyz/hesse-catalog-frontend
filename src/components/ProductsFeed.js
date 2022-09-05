@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useState } from 'react';
 import api from '../services/api';
 import ProductCard from './ProductCard';
@@ -17,9 +18,20 @@ const FeedWrapper = styled.div`
   }
 `;
 
-const ProductsFeed = () => {
+const ProductsFeed = ({ activeTypes }) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const getFiltredFeed = () => {
+    let filtred = [...products];
+    if (activeTypes.length !== 0)
+      filtred = products.filter((p) =>
+        p.attributes.product_types.data.some((t) =>
+          activeTypes.includes(t.attributes.name)
+        )
+      );
+    return filtred.map((p) => <ProductCard key={p.id} product={p} />);
+  };
 
   useEffect(() => {
     api.getProducts().then((res) => {
@@ -27,14 +39,9 @@ const ProductsFeed = () => {
       setLoading(false);
     });
   }, []);
+
   return (
-    <FeedWrapper>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        products.map((p) => <ProductCard key={p.id} product={p} />)
-      )}
-    </FeedWrapper>
+    <FeedWrapper>{loading ? <p>Loading...</p> : getFiltredFeed()}</FeedWrapper>
   );
 };
 
