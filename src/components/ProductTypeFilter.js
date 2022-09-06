@@ -1,21 +1,7 @@
-/* eslint-disable react/prop-types */
 import { useEffect, useState } from 'react';
 import api from '../services/api';
 import styled from 'styled-components';
 import ProductTypeButton from './ProductTypeButton';
-
-const FilterWrapper = styled.div`
-  padding: 10px 14px;
-  border-top: 1px solid #828282;
-  display: flex;
-  column-gap: 10px;
-  overflow-x: auto;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  &::-webkit-scrollbar {
-    display: none;
-  }
-`;
 
 const ProductTypeFilter = ({ activeTypes, setActiveTypes }) => {
   const [types, setTypes] = useState([]);
@@ -61,5 +47,18 @@ const ProductTypeFilter = ({ activeTypes, setActiveTypes }) => {
     </FilterWrapper>
   );
 };
+
+const FilterWrapper = styled.div`
+  padding: 10px 14px;
+  border-top: 1px solid #828282;
+  display: flex;
+  column-gap: 10px;
+  overflow-x: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
 
 export default ProductTypeFilter;

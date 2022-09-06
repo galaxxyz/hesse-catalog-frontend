@@ -1,6 +1,31 @@
-/* eslint-disable react/prop-types */
 import styled from 'styled-components';
-import { GoldIcon, PlatinumIcon, SilverIcon } from '../assets';
+import getSubscriptionIcon from '../helpers/getSubscriptionIcon';
+
+const ProductCard = ({ product }) => {
+  return (
+    <CardWrapper>
+      <CardImage
+        src={`http://localhost:1337${product.attributes.image.data[0].attributes.url}`}
+        alt=""
+      />
+      <CardInfo>
+        <CardHeading>
+          <Designer>{product.attributes.designer}</Designer>
+          {getSubscriptionIcon(
+            product.attributes.subscription_type.data.attributes.name
+          )}
+        </CardHeading>
+        <PriceContainer>
+          <Subscription>
+            {product.attributes.subscription_type.data.attributes.monthly_price}
+            € / mese
+          </Subscription>
+          <RetailPrice>{product.attributes.retail_price}€</RetailPrice>
+        </PriceContainer>
+      </CardInfo>
+    </CardWrapper>
+  );
+};
 
 const CardWrapper = styled.div``;
 
@@ -56,44 +81,5 @@ const Subscription = styled.p`
   color: #171717;
   margin: 0;
 `;
-
-const getSubscriptionIcon = (subscription) => {
-  switch (subscription) {
-    case 'silver':
-      return <SilverIcon />;
-    case 'gold':
-      return <GoldIcon />;
-    case 'platinum':
-      return <PlatinumIcon />;
-    default:
-      return null;
-  }
-};
-
-const ProductCard = ({ product }) => {
-  return (
-    <CardWrapper>
-      <CardImage
-        src={`http://localhost:1337${product.attributes.image.data[0].attributes.url}`}
-        alt=""
-      />
-      <CardInfo>
-        <CardHeading>
-          <Designer>{product.attributes.designer}</Designer>
-          {getSubscriptionIcon(
-            product.attributes.subscription_type.data.attributes.name
-          )}
-        </CardHeading>
-        <PriceContainer>
-          <Subscription>
-            {product.attributes.subscription_type.data.attributes.monthly_price}
-            € / mese
-          </Subscription>
-          <RetailPrice>{product.attributes.retail_price}€</RetailPrice>
-        </PriceContainer>
-      </CardInfo>
-    </CardWrapper>
-  );
-};
 
 export default ProductCard;

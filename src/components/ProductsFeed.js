@@ -1,26 +1,18 @@
-/* eslint-disable react/prop-types */
 import { useEffect, useState } from 'react';
 import api from '../services/api';
 import ProductCard from './ProductCard';
 import styled from 'styled-components';
 
-const FeedWrapper = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  & > div {
-    border-top: 1px solid #828282;
-  }
-  & > div:nth-child(2n + 1) {
-    padding-right: 2px;
-  }
-  & > div:nth-child(2n) {
-    padding-left: 2px;
-  }
-`;
-
-const ProductsFeed = ({ activeTypes }) => {
+const ProductsFeed = ({ activeTypes, activeSubscriptions }) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    api.getProducts().then((res) => {
+      setProducts(res.data);
+      setLoading(false);
+    });
+  }, []);
 
   const getFiltredFeed = () => {
     let filtred = [...products];
@@ -30,19 +22,32 @@ const ProductsFeed = ({ activeTypes }) => {
           activeTypes.includes(t.attributes.name)
         )
       );
+    if (activeSubscriptions.length !== 0)
+      filtred = filtred.filter((p) =>
+        activeSubscriptions.includes(
+          p.attributes.subscription_type.data.attributes.name
+        )
+      );
     return filtred.map((p) => <ProductCard key={p.id} product={p} />);
   };
-
-  useEffect(() => {
-    api.getProducts().then((res) => {
-      setProducts(res.data);
-      setLoading(false);
-    });
-  }, []);
 
   return (
     <FeedWrapper>{loading ? <p>Loading...</p> : getFiltredFeed()}</FeedWrapper>
   );
 };
+
+const FeedWrapper = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  & > div {
+    border-top: 1px solid #828282;
+  }
+  & > div:nth-child(2n + 3) {
+    padding-right: 2px;
+  }
+  & > div:nth-child(2n + 4) {
+    padding-left: 2px;
+  }
+`;
 
 export default ProductsFeed;
