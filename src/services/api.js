@@ -7,13 +7,13 @@ const getProducts = async () => {
 };
 
 const getSubscriptions = async () => {
-  const response = await fetch(`${baseURL}/subscription-types?populate=*`);
+  const response = await fetch(`${baseURL}/subscription-types`);
   const data = await response.json();
   return data;
 };
 
 const getProductTypes = async () => {
-  const response = await fetch(`${baseURL}/product-types?populate=*`);
+  const response = await fetch(`${baseURL}/product-types`);
   const data = await response.json();
   return data;
 };
