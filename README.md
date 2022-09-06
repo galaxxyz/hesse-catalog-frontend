@@ -1,70 +1,39 @@
-# Getting Started with Create React App
+# Hesse Catalog
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This repo is a frontend part of the project, you can find backend repo [here](https://github.com/galaxxyz/hesse-catalog-backend).
 
-## Available Scripts
+### To run the project on your computer:
 
-In the project directory, you can run:
+#### Backend
 
-### `npm start`
+0. Open terminal
+1. Clone backend `git clone https://github.com/galaxxyz/hesse-catalog-backend.git `
+2. Move to backend directory `cd hesse-catalog-backend` and execute command `npm install` to install all dependencies
+3. Execute command `npm start` to start the server
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+#### Frontend
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+4. Open another terminal in the same directory where you opened the first one.
+5. Clone frontend `git clone https://github.com/galaxxyz/hesse-catalog-frontend.git `
+6. Move to frontend directory `cd hesse-catalog-frontend` and execute command `npm install` to install all dependencies
+7. Execute command `npm start` to start the server
 
-### `npm test`
+### Notes
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### SVG icons
 
-### `npm run build`
+In the description of the task, it was indicated that the subscription icons should be stored on the backend side. In my opinion, it doesn't make sense for a website to constantly load the same icons from the backend and it would be more efficient to store them on the frontend side.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+However, since **Hesse is a mobile application** it makes sense such a decision may be necessary. Since the **update of the mobile application depends on the desire of the user**, it is necessary to provide a mechanism for obtaining all those data from the backend that **cannot wait for a local update of the mobile application**. Subscriptions are such data, and in case of a change in their cost, this should be displayed immediately in the application.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Unfortunately, while working on this task, I did not find a suitable method for dynamically loading svg icons, so that later it would be easy to manipulate their color, which is necessary when changing the state of subscription buttons. But I'm sure there is a solution, we just need to do more research.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### State management
 
-### `npm run eject`
+As an improvement to this project, I would definitely start using a state management library (like Redux) in the future to separate the state logic from the components.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### List of tools used for the project:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- [Strapi](https://strapi.io/)
+- [Create React App](https://create-react-app.dev/)
+- [Styled Components](https://www.styled-components.com)
